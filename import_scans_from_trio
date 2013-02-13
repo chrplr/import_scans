@@ -1,0 +1,59 @@
+#! /bin/bash
+# Importation of exams from TimTrio database and convertion to nifti 4D
+# Time-stamp: <2013-02-13 17:39 christophe@pallier.org>
+# Time-stamp: <2012-09-12 11:36:30 am985309>
+
+if [ "$1" == "" ]
+then
+    echo Usage: 
+    echo $0 "acq date nip series_num1 target_name1 [exam_numbers2 target_name2]"
+    echo "series_num must be 2-digit number (e.g. '01', '12', ...)"
+    echo
+    echo " Importation of exams from TimTrio databse and convertion to nifti 4D."
+    echo
+    echo Example: $0 20110404 fp110067 02 anat 05 norm1 07 jabb1 09 norm2 11 jabb2 13 norm3 15 jabb3 
+    exit 1
+fi
+
+OWD=$PWD
+
+DB=/neurospin/acquisition/database/TrioTim 
+
+DATE=$1
+shift
+
+NIP=$1
+shift
+
+if [ -d $DB/$DATE/$NIP* ] ; then
+
+    SUJDIR=$DB/$DATE/$NIP*
+
+# ATTENTION: BUG if MORE than ONE SUBJECT FITS !!!
+
+    while [ $1 ]
+    do
+	SERIES=$1
+	BN=$SUJDIR/0000${SERIES}*/*
+	shift
+	TARGET_NAME=$1
+	echo
+	echo Importing $SUJDIR/0000${SERIES}*
+	DIRNAME=Exam_0000${SERIES}
+	mkdir ${DIRNAME}
+	cp -a ${BN} ${DIRNAME}
+        # convertion from dicom to nifti
+        OUTPUT_NAME=${TARGET_NAME}_${NIP}_${DATE}_$SERIES.nii
+        echo Converting to ${OUTPUT_NAME}
+	dcm2nii -g n -d n -e n -p n ${DIRNAME} &>/dev/null && find ${DIRNAME} -name '*.nii' -exec mv '{}' ${OUTPUT_NAME} ';' 
+	shift
+    done
+
+else
+    echo "Problem: $DB/$DATE/$NIP does not seem to exist"
+    exit 1
+fi
+
+# suppress the directory containing the dicom files
+\rm -rf Exam*
+
