@@ -1,0 +1,97 @@
+#! /bin/bash
+# Time-stamp: <2015-11-25 17:47 christophe@pallier.org>
+
+if [ "$1" == "-h" ]
+then
+    echo Usage: 
+    echo $0 " [-a ANAT_DIR] [-f FMRI_DIR] < list_subjects.txt"
+    echo
+    echo 
+    echo Reads standard input line by line. 
+    echo Each line must have the following format:
+    echo   dirname date nip num1 name1 [num2 name2 [num3 name3 ...]
+    echo where numXX specify the series\' number, using 2 digits
+    echo ignore lines starting with \'#\'
+    echo Download the dicom files from the server, convert them into nii
+    echo and move them in the ANAT_DIR and FMRI_DIR subdirectories.
+    exit 1
+fi
+
+# the default directories...
+ANAT_DIR=t1mri/acquisition1
+FMRI_DIR=fMRI/acquisition1
+
+# can be changed with options on the command line
+while getopts ":a:f:" opt; do
+  case $opt in
+    a)
+	  ANAT_DIR=$OPTARG
+	  ;;
+    f)
+	  FMRI_DIR=$OPTARG
+	  ;;
+    1)
+	  ANAT_DIR=t1mri/acquisition1
+	  FMRI_DIR=fMRI/acquisition1
+	  ;;
+    2)
+	  ANAT_DIR=t1mri/acquisition2
+	  FMRI_DIR=fMRI/acquisition2
+	  ;;
+    3)
+	  ANAT_DIR=t1mri/acquisition3
+	  FMRI_DIR=fMRI/acquisition3
+	  ;;
+    4)
+	  ANAT_DIR=t1mri/acquisition4
+	  FMRI_DIR=fMRI/acquisition4
+	  ;;
+    5)
+	  ANAT_DIR=t1mri/acquisition5
+	  FMRI_DIR=fMRI/acquisition5
+	  ;;
+    6)
+	  ANAT_DIR=t1mri/acquisition6
+	  FMRI_DIR=fMRI/acquisition6
+	  ;;
+    7)
+	  ANAT_DIR=t1mri/acquisition7
+	  FMRI_DIR=fMRI/acquisition7
+	  ;;
+    8)
+	  ANAT_DIR=t1mri/acquisition8
+	  FMRI_DIR=fMRI/acquisition8
+	  ;;
+    9) 
+	  ANAT_DIR=t1mri/acquisition9
+	  FMRI_DIR=fMRI/acquisition9
+	  ;;
+  esac
+done
+
+
+function create_mri_directories_and_move_nii () {
+    echo Moving nii files to \"${ANAT_DIR}\" and \"${FMRI_DIR}\"
+    mkdir -p $1
+    mkdir -p $2
+    find -maxdepth 1 -name 'anat*.nii' -exec mv '{}' "$1" ';'
+    find -maxdepth 1 -name '*.nii' -exec mv '{}' "$2" ';'
+}
+
+
+while read SUBJECT LINE
+do
+    if [ "x$SUBJECT" == "x" ] ; then continue ; fi
+    if ( echo "$SUBJECT ++" | grep -vq "^#" ) ; then
+	echo 
+	echo "Creating directory $SUBJECT"
+	mkdir -p $SUBJECT
+	cd $SUBJECT 
+	echo  "import_series_from_trio $LINE"
+	import_scans_from_prisma $LINE
+	create_mri_directories_and_move_nii ${ANAT_DIR} ${FMRI_DIR}
+	cd ..
+    fi
+done
+
+

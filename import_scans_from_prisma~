@@ -1,6 +1,7 @@
 #! /bin/bash
 # Importation of exams from TimTrio database and convertion to nifti 4D
-# Time-stamp: <2015-11-25 17:49 christophe@pallier.org>
+# Time-stamp: <2013-02-13 17:39 christophe@pallier.org>
+# Time-stamp: <2012-09-12 11:36:30 am985309>
 
 if [ "$1" == "" ]
 then
@@ -17,8 +18,6 @@ fi
 OWD=$PWD
 
 DB=/neurospin/acquisition/database/TrioTim 
-#DB2=/neurospin/acquisition/database/Prisma_fit/
-#DB3=/neurospin/acquisition/database/Investigational_Device_7T/
 
 DATE=$1
 shift
