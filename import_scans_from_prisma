@@ -56,4 +56,3 @@ fi
 
 # suppress the directory containing the dicom files
 \rm -rf Exam*
-

@@ -4,7 +4,7 @@
 
 if [ "$1" == "" ]
 then
-    echo Usage: 
+    echo Usage:
     echo $0 "acq date nip series_num1 target_name1 [exam_numbers2 target_name2]"
     echo "series_num must be 2-digit number (e.g. '01', '12', ...)"
     echo
@@ -16,7 +16,7 @@ fi
 
 OWD=$PWD
 
-DB=/neurospin/acquisition/database/TrioTim 
+DB=/neurospin/acquisition/database/TrioTim
 #DB2=/neurospin/acquisition/database/Prisma_fit/
 #DB3=/neurospin/acquisition/database/Investigational_Device_7T/
 
@@ -57,4 +57,3 @@ fi
 
 # suppress the directory containing the dicom files
 \rm -rf Exam*
-
