@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 # Time-stamp: <2011-05-03 11:46:58 cp983411>
 
 # Beware: this will delete raw function files if their name start with [swr]
