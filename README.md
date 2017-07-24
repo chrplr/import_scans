@@ -22,12 +22,12 @@ Usage:
 The textual input (e.g. **list_subjects.txt**) describes the scans to download. Here is an example:
 
 ```
- subj01  20110404 fp110067 02 anat 05 norm1 07 jabb1 09 norm2 
- subj02  20110404 kl198789 02 anat 05 norm1 07 jabb1 09 norm2 
+ subj01  20110404 fp110067 02 anat 05 norm1 07 jabb1 09 norm2
+ subj02  20110404 kl198789 02 anat 05 norm1 07 jabb1 09 norm2
   ...
 ```
 
-There is one line per participant: 
+There is one line per participant:
 
 - The first item of each line is the name of the directory where this participant's data will be saved.
 - The second item is the date of acquisition in the format YYYYMMDD,
@@ -37,9 +37,9 @@ this series.
 
 
 Notes:
-* to download the scripts: 
+* to download the scripts:
 `git clone https://github.com/neurospin/import_scans.git`
-This will create a directory `import_scans`. To install the scripts, just copy the files to a directory listed in your PATH variable (e.g. `$HOME/bin`). 
+This will create a directory `import_scans`. To install the scripts, just copy the files to a directory listed in your PATH variable (e.g. `$HOME/bin`).
 
 * This script reads from the standard input; therefore you can use _grep_ to extract the relevant lines from the list if you want to include only some participants. Also, lines starting with `#` are ignored, so you can add `#` in front of the subjects that you do not want to download.
 
@@ -47,12 +47,9 @@ This will create a directory `import_scans`. To install the scripts, just copy t
 
 * Rhis script automatically puts the data into the **`t1mri/acquisition1`** and **`fMRI/acquisition1`** subfolders respecting the conventions of the  brainvisa software in use at Neurospin. However, if you prefer to use a different naming convention, the script has two options `-a` and `-f` options to specify the `ANAT_DIR` and `FMRI_DIR` respectively:
 
-For example, to specify that the files are to be saved in `anat` and `fMRI` subdirs: 
+For example, to specify that the files are to be saved in `anat` and `fMRI` subdirs:
 ```
    import_subjects_from_trio -a anat -f fMRI < list_subjects.txt
 ```
 
 If a given subject has undergone several independant scanning sessions at different times, you can use `-a anat/acquisition2 -f fMRI/acquisition2`.
-
-
-

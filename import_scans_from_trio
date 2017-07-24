@@ -10,7 +10,7 @@ then
     echo
     echo " Importation of exams from TimTrio databse and convertion to nifti 4D."
     echo
-    echo Example: $0 20110404 fp110067 02 anat 05 norm1 07 jabb1 09 norm2 11 jabb2 13 norm3 15 jabb3 
+    echo Example: $0 20110404 fp110067 02 anat 05 norm1 07 jabb1 09 norm2 11 jabb2 13 norm3 15 jabb3
     exit 1
 fi
 
@@ -46,7 +46,7 @@ if [ -d $DB/$DATE/$NIP* ] ; then
         # convertion from dicom to nifti
         OUTPUT_NAME=${TARGET_NAME}_${NIP}_${DATE}_$SERIES.nii
         echo Converting to ${OUTPUT_NAME}
-	dcm2nii -g n -d n -e n -p n ${DIRNAME} &>/dev/null && find ${DIRNAME} -name '*.nii' -exec mv '{}' ${OUTPUT_NAME} ';' 
+	dcm2nii -g n -d n -e n -p n ${DIRNAME} &>/dev/null && find ${DIRNAME} -name '*.nii' -exec mv '{}' ${OUTPUT_NAME} ';'
 	shift
     done
 

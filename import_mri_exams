@@ -83,10 +83,10 @@ while read SUBJECT LINE
 do
     if [ "x$SUBJECT" == "x" ] ; then continue ; fi
     if ( echo "$SUBJECT ++" | grep -vq "^#" ) ; then
-	echo 
+	echo
 	echo "Creating directory $SUBJECT"
 	mkdir -p $SUBJECT
-	cd $SUBJECT 
+	cd $SUBJECT
 	echo  "import_series_from_trio $LINE"
 	import_scans_from_trio $LINE
 	create_mri_directories_and_move_nii ${ANAT_DIR} ${FMRI_DIR}
