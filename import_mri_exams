@@ -22,7 +22,8 @@ ANAT_DIR=t1mri/acquisition1
 FMRI_DIR=fMRI/acquisition1
 
 # can be changed with options on the command line
-while getopts ":a:f:" opt; do
+while getopts ":a:f:" opt
+do
   case $opt in
     a)
 	  ANAT_DIR=$OPTARG
@@ -83,13 +84,13 @@ while read SUBJECT LINE
 do
     if [ "x$SUBJECT" == "x" ] ; then continue ; fi
     if ( echo "$SUBJECT ++" | grep -vq "^#" ) ; then
-	echo
-	echo "Creating directory $SUBJECT"
-	mkdir -p $SUBJECT
-	cd $SUBJECT
-	echo  "import_series_from_trio $LINE"
-	import_scans_from_trio $LINE
-	create_mri_directories_and_move_nii ${ANAT_DIR} ${FMRI_DIR}
-	cd ..
+        echo
+        echo "Creating directory $SUBJECT"
+        mkdir -p $SUBJECT
+        cd $SUBJECT
+        echo  "import_series_from_trio $LINE"
+        import_scans_from_trio $LINE
+        create_mri_directories_and_move_nii ${ANAT_DIR} ${FMRI_DIR}
+        cd ..
     fi
 done
