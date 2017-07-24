@@ -24,50 +24,50 @@ FMRI_DIR=fMRI/acquisition1
 # can be changed with options on the command line
 while getopts ":a:f:" opt
 do
-  case $opt in
+    case $opt in
     a)
-	  ANAT_DIR=$OPTARG
-	  ;;
+          ANAT_DIR=$OPTARG
+          ;;
     f)
-	  FMRI_DIR=$OPTARG
-	  ;;
+          FMRI_DIR=$OPTARG
+          ;;
     1)
-	  ANAT_DIR=t1mri/acquisition1
-	  FMRI_DIR=fMRI/acquisition1
-	  ;;
+          ANAT_DIR=t1mri/acquisition1
+          FMRI_DIR=fMRI/acquisition1
+          ;;
     2)
-	  ANAT_DIR=t1mri/acquisition2
-	  FMRI_DIR=fMRI/acquisition2
-	  ;;
+          ANAT_DIR=t1mri/acquisition2
+          FMRI_DIR=fMRI/acquisition2
+          ;;
     3)
-	  ANAT_DIR=t1mri/acquisition3
-	  FMRI_DIR=fMRI/acquisition3
-	  ;;
+          ANAT_DIR=t1mri/acquisition3
+          FMRI_DIR=fMRI/acquisition3
+          ;;
     4)
-	  ANAT_DIR=t1mri/acquisition4
-	  FMRI_DIR=fMRI/acquisition4
-	  ;;
+          ANAT_DIR=t1mri/acquisition4
+          FMRI_DIR=fMRI/acquisition4
+          ;;
     5)
-	  ANAT_DIR=t1mri/acquisition5
-	  FMRI_DIR=fMRI/acquisition5
-	  ;;
+          ANAT_DIR=t1mri/acquisition5
+          FMRI_DIR=fMRI/acquisition5
+          ;;
     6)
-	  ANAT_DIR=t1mri/acquisition6
-	  FMRI_DIR=fMRI/acquisition6
-	  ;;
+          ANAT_DIR=t1mri/acquisition6
+          FMRI_DIR=fMRI/acquisition6
+          ;;
     7)
-	  ANAT_DIR=t1mri/acquisition7
-	  FMRI_DIR=fMRI/acquisition7
-	  ;;
+          ANAT_DIR=t1mri/acquisition7
+          FMRI_DIR=fMRI/acquisition7
+          ;;
     8)
-	  ANAT_DIR=t1mri/acquisition8
-	  FMRI_DIR=fMRI/acquisition8
-	  ;;
+          ANAT_DIR=t1mri/acquisition8
+          FMRI_DIR=fMRI/acquisition8
+          ;;
     9)
-	  ANAT_DIR=t1mri/acquisition9
-	  FMRI_DIR=fMRI/acquisition9
-	  ;;
-  esac
+          ANAT_DIR=t1mri/acquisition9
+          FMRI_DIR=fMRI/acquisition9
+          ;;
+    esac
 done
 
 
@@ -83,7 +83,8 @@ function create_mri_directories_and_move_nii () {
 while read SUBJECT LINE
 do
     if [ "x$SUBJECT" == "x" ] ; then continue ; fi
-    if ( echo "$SUBJECT ++" | grep -vq "^#" ) ; then
+    if ( echo "$SUBJECT ++" | grep -vq "^#" )
+    then
         echo
         echo "Creating directory $SUBJECT"
         mkdir -p $SUBJECT

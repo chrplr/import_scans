@@ -25,7 +25,8 @@ shift
 NIP=$1
 shift
 
-if [ -d $DB/$DATE/$NIP* ] ; then
+if [ -d $DB/$DATE/$NIP* ]
+then
 
     SUJDIR=$DB/$DATE/$NIP*
 
@@ -33,20 +34,20 @@ if [ -d $DB/$DATE/$NIP* ] ; then
 
     while [ $1 ]
     do
-	SERIES=$1
-	BN=$SUJDIR/0000${SERIES}*/*
-	shift
-	TARGET_NAME=$1
-	echo
-	echo Importing $SUJDIR/0000${SERIES}*
-	DIRNAME=Exam_0000${SERIES}
-	mkdir ${DIRNAME}
-	cp -a ${BN} ${DIRNAME}
+        SERIES=$1
+        BN=$SUJDIR/0000${SERIES}*/*
+        shift
+        TARGET_NAME=$1
+        echo
+        echo Importing $SUJDIR/0000${SERIES}*
+        DIRNAME=Exam_0000${SERIES}
+        mkdir ${DIRNAME}
+        cp -a ${BN} ${DIRNAME}
         # convertion from dicom to nifti
         OUTPUT_NAME=${TARGET_NAME}_${NIP}_${DATE}_$SERIES.nii
         echo Converting to ${OUTPUT_NAME}
-	dcm2nii -g n -d n -e n -p n ${DIRNAME} &>/dev/null && find ${DIRNAME} -name '*.nii' -exec mv '{}' ${OUTPUT_NAME} ';'
-	shift
+        dcm2nii -g n -d n -e n -p n ${DIRNAME} &>/dev/null && find ${DIRNAME} -name '*.nii' -exec mv '{}' ${OUTPUT_NAME} ';'
+        shift
     done
 
 else
