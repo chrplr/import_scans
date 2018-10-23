@@ -45,7 +45,7 @@ This will create a directory `import_scans`. To install the scripts, just copy t
 
 * The conversion from DICOM to NIfTI is handled by [dcm2nii](http://people.cas.sc.edu/rorden/mricron/dcm2nii.html).
 
-* Rhis script automatically puts the data into the **`t1mri/acquisition1`** and **`fMRI/acquisition1`** subfolders respecting the conventions of the  brainvisa software in use at Neurospin. However, if you prefer to use a different naming convention, the script has two options `-a` and `-f` options to specify the `ANAT_DIR` and `FMRI_DIR` respectively:
+* This script automatically puts the data into the **`t1mri/acquisition1`** and **`fMRI/acquisition1`** subfolders respecting the conventions of the  brainvisa software in use at Neurospin. However, if you prefer to use a different naming convention, the script has two options `-a` and `-f` options to specify the `ANAT_DIR` and `FMRI_DIR` respectively:
 
 For example, to specify that the files are to be saved in `anat` and `fMRI` subdirs:
 ```
